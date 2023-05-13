@@ -1746,8 +1746,8 @@ GameObject:
   - component: {fileID: 5881984335146743789}
   - component: {fileID: 5881984335146743762}
   - component: {fileID: 5881984335146743763}
-  - component: {fileID: -3393241444986629299}
   - component: {fileID: 2124729746}
+  - component: {fileID: -6796437377269293067}
   m_Layer: 6
   m_Name: CopZombie
   m_TagString: Enemy
@@ -1812,7 +1812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b005e494525684485712fd26d76682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 5462145872540270747, guid: 84cdd3cc86e48db46a23f7abc209fbdb, type: 3}
   playerPosition: {x: 0, y: 0, z: 0}
 --- !u!195 &5881984335146743763
 NavMeshAgent:
@@ -1836,33 +1836,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!95 &-3393241444986629299
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728492498833394360}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 07237c7a93b84e24a8d5ccff99b94df1, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7b14e38feda4235418253a6c14d6d5cf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-    'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Zombie Idle'\n\tFrom
-    animation clip 'Zombie Walk'"
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!136 &2124729746
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1877,6 +1850,26 @@ CapsuleCollider:
   m_Height: 2.509139
   m_Direction: 1
   m_Center: {x: 0, y: 0.75456953, z: 0}
+--- !u!95 &-6796437377269293067
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728492498833394360}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b14e38feda4235418253a6c14d6d5cf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &6819576878454122979
 GameObject:
   m_ObjectHideFlags: 0

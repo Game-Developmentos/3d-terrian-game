@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b005e494525684485712fd26d76682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 5462145872540270747, guid: 84cdd3cc86e48db46a23f7abc209fbdb, type: 3}
   playerPosition: {x: 0, y: 0, z: 0}
 --- !u!136 &919132148449442955
 CapsuleCollider:

@@ -143,7 +143,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664174053078575273}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 843fdaed06afa3c40b21f71ff1374e5a, type: 3}
+  m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 7b14e38feda4235418253a6c14d6d5cf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b005e494525684485712fd26d76682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 5462145872540270747, guid: 84cdd3cc86e48db46a23f7abc209fbdb, type: 3}
   playerPosition: {x: 0, y: 0, z: 0}
 --- !u!195 &429802503937889762
 NavMeshAgent:
@@ -210,7 +210,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
