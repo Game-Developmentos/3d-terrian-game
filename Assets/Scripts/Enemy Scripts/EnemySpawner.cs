@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject zombiePrefab;
+    public GameObject[] zombiePrefabs;
 
     [SerializeField] private float spawnInterval = 5f;
-    // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("spawnEnemy", spawnInterval, spawnInterval);
@@ -16,15 +16,14 @@ public class EnemySpawner : MonoBehaviour
 
     void spawnEnemy()
     {
+        NavMeshHit hit;
         Vector3 randomPos = transform.position + Random.insideUnitSphere * 10f;
-        Instantiate(zombiePrefab, randomPos, Quaternion.identity);
-
-
+        if (NavMesh.SamplePosition(randomPos, out hit, 10f, NavMesh.AllAreas))
+        {
+            int randomIndex = Random.Range(0, zombiePrefabs.Length);
+            Instantiate(zombiePrefabs[randomIndex], hit.position, Quaternion.identity);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
 }

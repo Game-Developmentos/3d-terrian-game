@@ -25,7 +25,7 @@ public class StateMachine : MonoBehaviour
         if (activeState != null) activeState.enabled = false;
         activeState = newActiveState;
         activeState.enabled = true;
-        Debug.Log("Going to state " + activeState);
+        // Debug.Log("Going to state " + activeState);
     }
 
     public StateMachine AddState(State newState) {
