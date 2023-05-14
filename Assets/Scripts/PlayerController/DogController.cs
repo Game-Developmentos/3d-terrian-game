@@ -111,7 +111,7 @@ public class DogController : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (gameObject && other.gameObject.CompareTag("Trick")) {
+        if (gameObject && other.gameObject.CompareTag("Obstacle")) {
             scoreManager.AddScore();
         }
     }
