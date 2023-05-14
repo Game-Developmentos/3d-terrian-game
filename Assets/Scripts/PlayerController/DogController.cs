@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
@@ -15,6 +16,8 @@ public class DogController : MonoBehaviour
     public ScoreManager scoreManager;
 
     public GameOverScreen gameOverScreen;
+
+    public ProgressBar progressBar;
 
     [SerializeField] Vector2 currentMovementInput;
     [SerializeField] Vector3 currentMovement;
@@ -105,9 +108,22 @@ public class DogController : MonoBehaviour
         {
             if (gameOverScreen)
             {
-                gameOverScreen.setup(scoreManager.getScore());
+                if (progressBar.GetCurrentHealth() <= 0)
+                {
+                    gameOverScreen.setup(scoreManager.getScore());
+                }
             }
         }
+    }
+
+    private IEnumerator HitPlayer()
+    {
+        progressBar.DecreaseHealth();
+        yield return new WaitForSeconds(1f);
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        StartCoroutine(HitPlayer());
     }
 
     private void OnTriggerEnter(Collider other)
