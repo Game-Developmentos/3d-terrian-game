@@ -18,15 +18,27 @@ public class EnemySpawner : MonoBehaviour
         ScheduleNextSpawn();
     }
 
+    private bool HasCollision(Vector3 currPos)
+    {
+        int maxColliders = 5;
+        Collider[] hitColliders = new Collider[maxColliders];
+        int numColliders = Physics.OverlapSphereNonAlloc(currPos, 0.1f, hitColliders);
+        return numColliders > 0;
+    }
     private void ScheduleNextSpawn()
     {
         SpawnTime = Random.Range(minTimeToSpawn, maxTimeToSpawn);
-        Invoke("spawnEnemy", SpawnTime);
+        Invoke("SpawnEnemy", SpawnTime);
     }
-    void spawnEnemy()
+    void SpawnEnemy()
     {
         NavMeshHit hit;
         Vector3 randomPos = transform.position + Random.insideUnitSphere * 10f;
+        if (HasCollision(randomPos))
+        {
+            ScheduleNextSpawn();
+            return;
+        }
         if (NavMesh.SamplePosition(randomPos, out hit, 10f, NavMesh.AllAreas) && numOfEnemies < 20)
         {
             int randomIndex = Random.Range(0, zombiePrefabs.Length);

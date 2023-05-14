@@ -110,9 +110,20 @@ public class DogController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (gameObject && other.gameObject.CompareTag("Obstacle")) {
-            scoreManager.AddScore();
+    private void OnTriggerEnter(Collider other)
+    {
+        if (gameObject != null)
+        {
+            if (other.gameObject.CompareTag("Obstacle"))
+            {
+                scoreManager.AddScore();
+            }
+            else if (other.gameObject.CompareTag("Food"))
+            {
+                other.gameObject.SetActive(false);
+                scoreManager.AddScore();
+            }
+
         }
     }
 }
