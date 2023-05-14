@@ -107,4 +107,4 @@ $RECYCLE.BIN/
 # Pycharm project
 .idea
 .vscode
-Packs/*
+TerrainSampleAssets/
