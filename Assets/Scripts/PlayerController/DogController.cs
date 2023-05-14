@@ -10,6 +10,12 @@ public class DogController : MonoBehaviour
     [Header("Keyboard Input")]
     private DogInputActions dogInputActions;
 
+    // private int dogPoints;
+
+    public ScoreManager scoreManager;
+
+    public GameOverScreen gameOverScreen;
+
     [SerializeField] Vector2 currentMovementInput;
     [SerializeField] Vector3 currentMovement;
     [SerializeField] private float moveSpeed = 5f;
@@ -90,6 +96,23 @@ public class DogController : MonoBehaviour
         else if (!isMovementPressed && isWalking)
         {
             animator.SetBool(isWalkingHash, false);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (gameObject && other.gameObject.CompareTag("Enemy"))
+        {
+            if (gameOverScreen)
+            {
+                gameOverScreen.setup(scoreManager.getScore());
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (gameObject && other.gameObject.CompareTag("Trick")) {
+            scoreManager.AddScore();
         }
     }
 }

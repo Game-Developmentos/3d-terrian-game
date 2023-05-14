@@ -7,7 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyRoaming))]
 public class EnemyControllerStateMachine : StateMachine
 {
-
     [SerializeField] float dangerRadius = 3f;
     private EnemyChaser chaser;
     private EnemyRoaming roaming;
@@ -31,5 +30,6 @@ public class EnemyControllerStateMachine : StateMachine
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, dangerRadius);
     }
+
 
 }
