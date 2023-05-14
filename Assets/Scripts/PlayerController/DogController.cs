@@ -119,7 +119,7 @@ public class DogController : MonoBehaviour
     private IEnumerator HitPlayer()
     {
         progressBar.DecreaseHealth();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
     }
     private void OnCollisionExit(Collision other)
     {
