@@ -12,7 +12,8 @@ public class EnemySpawner : MonoBehaviour
     private int numOfEnemies;
 
     private float SpawnTime;
-    void Start()
+    private int maxEnemies = 15;
+    private void Start()
     {
         numOfEnemies = 0;
         ScheduleNextSpawn();
@@ -30,16 +31,16 @@ public class EnemySpawner : MonoBehaviour
         SpawnTime = Random.Range(minTimeToSpawn, maxTimeToSpawn);
         Invoke("SpawnEnemy", SpawnTime);
     }
-    void SpawnEnemy()
+    private void SpawnEnemy()
     {
         NavMeshHit hit;
-        Vector3 randomPos = transform.position + Random.insideUnitSphere * 10f;
+        Vector3 randomPos = transform.position + Random.insideUnitSphere * 30f;
         if (HasCollision(randomPos))
         {
             ScheduleNextSpawn();
             return;
         }
-        if (NavMesh.SamplePosition(randomPos, out hit, 10f, NavMesh.AllAreas) && numOfEnemies < 20)
+        if (NavMesh.SamplePosition(randomPos, out hit, 10f, NavMesh.AllAreas) && numOfEnemies < maxEnemies)
         {
             int randomIndex = Random.Range(0, zombiePrefabs.Length);
             GameObject enemy = Instantiate(zombiePrefabs[randomIndex], hit.position, Quaternion.identity);

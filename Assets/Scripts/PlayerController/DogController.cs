@@ -7,17 +7,14 @@ using UnityEngine.InputSystem;
 public class DogController : MonoBehaviour
 {
     [SerializeField] private Transform cam;
-
-    [Header("Keyboard Input")]
-    private DogInputActions dogInputActions;
-
-    // private int dogPoints;
-
     public ScoreManager scoreManager;
 
     public GameOverScreen gameOverScreen;
 
     public ProgressBar progressBar;
+
+    [Header("Keyboard Input")]
+    private DogInputActions dogInputActions;
 
     [SerializeField] Vector2 currentMovementInput;
     [SerializeField] Vector3 currentMovement;
@@ -123,7 +120,10 @@ public class DogController : MonoBehaviour
     }
     private void OnCollisionExit(Collision other)
     {
-        StartCoroutine(HitPlayer());
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            StartCoroutine(HitPlayer());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -136,10 +136,9 @@ public class DogController : MonoBehaviour
             }
             else if (other.gameObject.CompareTag("Food"))
             {
-                other.gameObject.SetActive(false);
+                Destroy(other.gameObject);
                 scoreManager.AddScore();
             }
-
         }
     }
 }

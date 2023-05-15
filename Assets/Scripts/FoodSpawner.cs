@@ -36,7 +36,7 @@ public class FoodSpawner : MonoBehaviour
     void SpawnFood()
     {
         NavMeshHit hit;
-        Vector3 randomPos = transform.position + Random.insideUnitSphere * 20f;
+        Vector3 randomPos = transform.position + Random.insideUnitSphere * 30f;
         if (HasCollision(randomPos))
         {
             ScheduleNextSpawn();
@@ -49,7 +49,6 @@ public class FoodSpawner : MonoBehaviour
             numOfObjectsSpawned += 1;
         }
         ScheduleNextSpawn();
-
     }
 
 }
