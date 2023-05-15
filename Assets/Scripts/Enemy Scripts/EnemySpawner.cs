@@ -42,10 +42,10 @@ public class EnemySpawner : MonoBehaviour
         if (NavMesh.SamplePosition(randomPos, out hit, 10f, NavMesh.AllAreas) && numOfEnemies < 20)
         {
             int randomIndex = Random.Range(0, zombiePrefabs.Length);
-            Instantiate(zombiePrefabs[randomIndex], hit.position, Quaternion.identity);
+            GameObject enemy = Instantiate(zombiePrefabs[randomIndex], hit.position, Quaternion.identity);
+            enemy.gameObject.SetActive(true);
             numOfEnemies += 1;
         }
         ScheduleNextSpawn();
-
     }
 }
