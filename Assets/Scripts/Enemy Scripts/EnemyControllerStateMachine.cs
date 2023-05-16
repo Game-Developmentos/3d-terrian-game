@@ -11,8 +11,17 @@ public class EnemyControllerStateMachine : StateMachine
     private EnemyChaser chaser;
     private EnemyRoaming roaming;
 
+    private Animator animator;
+
+    private int isWalkingHash;
+    private int isAttackingHash;
+
+
     private void Awake()
     {
+        animator = GetComponent<Animator>();
+        isWalkingHash = Animator.StringToHash("isWalking");
+        isAttackingHash = Animator.StringToHash("isAttacking");
         chaser = GetComponent<EnemyChaser>();
         roaming = GetComponent<EnemyRoaming>();
         base.AddState(roaming) // first active state
@@ -29,6 +38,26 @@ public class EnemyControllerStateMachine : StateMachine
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, dangerRadius);
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (gameObject && other.gameObject.CompareTag("Player"))
+        {
+            animator.SetBool(isWalkingHash, false);
+            animator.SetBool(isAttackingHash, true);
+
+        }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        if (gameObject && other.gameObject.CompareTag("Player"))
+        {
+            animator.SetBool(isAttackingHash, false);
+            animator.SetBool(isWalkingHash, true);
+
+
+        }
     }
 
 

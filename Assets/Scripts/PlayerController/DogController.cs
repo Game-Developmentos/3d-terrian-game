@@ -98,40 +98,4 @@ public class DogController : MonoBehaviour
         }
     }
 
-    // private void OnCollisionEnter(Collision other)
-    // {
-    //     if (gameObject && other.gameObject.CompareTag("Enemy"))
-    //     {
-    //         OnGameOver?.Invoke(this, EventArgs.Empty);
-    //     }
-    // }
-
-    // private IEnumerator HitPlayer()
-    // {
-    //     OnHit?.Invoke(this, EventArgs.Empty);
-    //     yield return new WaitForSeconds(2f);
-    // }
-    // private void OnCollisionExit(Collision other)
-    // {
-    //     if (other.gameObject.CompareTag("Enemy"))
-    //     {
-    //         StartCoroutine(HitPlayer());
-    //     }
-    // }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (gameObject != null)
-    //     {
-    //         if (other.gameObject.CompareTag("Obstacle"))
-    //         {
-    //             OnPointGained?.Invoke(this, EventArgs.Empty);
-    //         }
-    //         else if (other.gameObject.CompareTag("Food"))
-    //         {
-    //             Destroy(other.gameObject);
-    //             OnPointGained?.Invoke(this, EventArgs.Empty);
-    //         }
-    //     }
-    // }
 }
