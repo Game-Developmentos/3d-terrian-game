@@ -4,14 +4,14 @@ using TMPro;
 
 public class GameOverScreen : MonoBehaviour
 {
-    [SerializeField] string sceneToLoad;
+    // [SerializeField] string sceneToLoad;
     public TMP_Text pointsText;
 
-    private void Awake()
-    {
-        sceneToLoad = SceneManager.GetActiveScene().name;
+    // private void Awake()
+    // {
+    //     sceneToLoad = SceneManager.GetActiveScene().name;
 
-    }
+    // }
 
     public void Setup(int score)
     {
@@ -21,6 +21,6 @@ public class GameOverScreen : MonoBehaviour
 
     public void TryAgainButton()
     {
-        SceneManager.LoadScene(sceneToLoad);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

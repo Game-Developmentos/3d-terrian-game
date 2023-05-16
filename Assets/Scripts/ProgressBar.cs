@@ -23,7 +23,7 @@ public class ProgressBar : MonoBehaviour
         return currentHealth;
     }
     public void DecreaseHealth() {
-        currentHealth-=25;
+        currentHealth-=5;
     }
     void GetCurrentFill()
     {

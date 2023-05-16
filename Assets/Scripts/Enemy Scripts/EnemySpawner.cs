@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         NavMeshHit hit;
-        Vector3 randomPos = transform.position + Random.insideUnitSphere * 30f;
+        Vector3 randomPos = transform.position + Random.insideUnitSphere * 25f;
         if (HasCollision(randomPos))
         {
             ScheduleNextSpawn();

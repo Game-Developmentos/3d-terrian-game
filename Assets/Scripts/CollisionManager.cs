@@ -7,6 +7,8 @@ public class CollisionManager : MonoBehaviour
     public event EventHandler OnPointGained;
     public event EventHandler OnHit;
     public event EventHandler OnGameOver;
+
+    private float hitDelayTime = 0.1f;
     private bool isTimerRunning = false;
 
     private void OnCollisionStay(Collision other)
@@ -23,7 +25,7 @@ public class CollisionManager : MonoBehaviour
     private IEnumerator InvokeEventsWithDelay()
     {
         isTimerRunning = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(hitDelayTime);
 
         // Invoke the events after the 2-second delay
         OnHit?.Invoke(this, EventArgs.Empty);
