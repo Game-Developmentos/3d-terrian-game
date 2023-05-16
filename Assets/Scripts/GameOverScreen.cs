@@ -10,8 +10,10 @@ public class GameOverScreen : MonoBehaviour
     private void Awake()
     {
         sceneToLoad = SceneManager.GetActiveScene().name;
+
     }
-    public void setup(int score)
+
+    public void Setup(int score)
     {
         gameObject.SetActive(true);
         pointsText.text = "You gained " + score.ToString() + " points!";

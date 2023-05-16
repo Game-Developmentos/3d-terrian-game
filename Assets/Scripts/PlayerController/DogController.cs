@@ -2,16 +2,16 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.InputSystem;
+using System;
 
 [RequireComponent(typeof(Animator))]
 public class DogController : MonoBehaviour
 {
+    // public event EventHandler OnPointGained;
+    // public event EventHandler OnHit;
+    // public event EventHandler OnGameOver;
     [SerializeField] private Transform cam;
-    public ScoreManager scoreManager;
 
-    public GameOverScreen gameOverScreen;
-
-    public ProgressBar progressBar;
 
     [Header("Keyboard Input")]
     private DogInputActions dogInputActions;
@@ -36,7 +36,6 @@ public class DogController : MonoBehaviour
         dogInputActions = new DogInputActions();
         animator = GetComponent<Animator>();
         cam = Camera.main.transform;
-
         isWalkingHash = Animator.StringToHash("isWalking");
         directionHash = Animator.StringToHash("direction");
         isInteractHash = Animator.StringToHash("isInteract");
@@ -99,46 +98,40 @@ public class DogController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (gameObject && other.gameObject.CompareTag("Enemy"))
-        {
-            if (gameOverScreen)
-            {
-                if (progressBar.GetCurrentHealth() <= 0)
-                {
-                    gameOverScreen.setup(scoreManager.getScore());
-                }
-            }
-        }
-    }
+    // private void OnCollisionEnter(Collision other)
+    // {
+    //     if (gameObject && other.gameObject.CompareTag("Enemy"))
+    //     {
+    //         OnGameOver?.Invoke(this, EventArgs.Empty);
+    //     }
+    // }
 
-    private IEnumerator HitPlayer()
-    {
-        progressBar.DecreaseHealth();
-        yield return new WaitForSeconds(2f);
-    }
-    private void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            StartCoroutine(HitPlayer());
-        }
-    }
+    // private IEnumerator HitPlayer()
+    // {
+    //     OnHit?.Invoke(this, EventArgs.Empty);
+    //     yield return new WaitForSeconds(2f);
+    // }
+    // private void OnCollisionExit(Collision other)
+    // {
+    //     if (other.gameObject.CompareTag("Enemy"))
+    //     {
+    //         StartCoroutine(HitPlayer());
+    //     }
+    // }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (gameObject != null)
-        {
-            if (other.gameObject.CompareTag("Obstacle"))
-            {
-                scoreManager.AddScore();
-            }
-            else if (other.gameObject.CompareTag("Food"))
-            {
-                Destroy(other.gameObject);
-                scoreManager.AddScore();
-            }
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (gameObject != null)
+    //     {
+    //         if (other.gameObject.CompareTag("Obstacle"))
+    //         {
+    //             OnPointGained?.Invoke(this, EventArgs.Empty);
+    //         }
+    //         else if (other.gameObject.CompareTag("Food"))
+    //         {
+    //             Destroy(other.gameObject);
+    //             OnPointGained?.Invoke(this, EventArgs.Empty);
+    //         }
+    //     }
+    // }
 }
