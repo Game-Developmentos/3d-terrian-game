@@ -6,13 +6,13 @@ using UnityEngine.AI;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject[] zombiePrefabs;
-    [SerializeField] private float minTimeToSpawn = 5f;
-    [SerializeField] private float maxTimeToSpawn = 15f;
+    [SerializeField] private float minTimeToSpawn = 4f;
+    [SerializeField] private float maxTimeToSpawn = 8f;
 
     private int numOfEnemies;
 
     private float SpawnTime;
-    private int maxEnemies = 15;
+    [SerializeField] private int maxEnemiesPerLocation = 20;
     private void Start()
     {
         numOfEnemies = 0;
@@ -40,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
             ScheduleNextSpawn();
             return;
         }
-        if (NavMesh.SamplePosition(randomPos, out hit, 10f, NavMesh.AllAreas) && numOfEnemies < maxEnemies)
+        if (NavMesh.SamplePosition(randomPos, out hit, 10f, NavMesh.AllAreas) && numOfEnemies < maxEnemiesPerLocation)
         {
             int randomIndex = Random.Range(0, zombiePrefabs.Length);
             GameObject enemy = Instantiate(zombiePrefabs[randomIndex], hit.position, Quaternion.identity);
