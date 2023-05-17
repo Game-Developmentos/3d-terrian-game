@@ -21,37 +21,42 @@ public class StateMachine : MonoBehaviour
     private State activeState = null;
 
     // Transitions to the specified state.
-    public void GoToState(State newActiveState) {
+    public void GoToState(State newActiveState)
+    {
         if (activeState == newActiveState) return;
         if (activeState != null) activeState.enabled = false;
         activeState = newActiveState;
         activeState.enabled = true;
         // Debug.Log("Going to state " + activeState);
     }
-
     // Adds a new state to the state machine.
-    public StateMachine AddState(State newState) {
+    public StateMachine AddState(State newState)
+    {
         states.Add(newState);
         return this;
     }
-    
     // Adds a transition from one state to another based on a condition.
-    public StateMachine AddTransition(State fromState, Func<bool> condition, State toState) {
+    public StateMachine AddTransition(State fromState, Func<bool> condition, State toState)
+    {
         transitions.Add(new Transition(fromState, condition, toState));
         return this;
     }
-
-    private void Start() {
-        foreach (State state in states) {
+    private void Start()
+    {
+        foreach (State state in states)
+        {
             state.enabled = false;
         }
         GoToState(states[0]);
     }
-
-    private void Update() {
-        foreach (Transition transition in transitions) {
-            if (transition.Item1 == activeState) {
-                if (transition.Item2() == true) {
+    private void Update()
+    {
+        foreach (Transition transition in transitions)
+        {
+            if (transition.Item1 == activeState)
+            {
+                if (transition.Item2() == true)
+                {
                     GoToState(transition.Item3);
                     break;
                 }

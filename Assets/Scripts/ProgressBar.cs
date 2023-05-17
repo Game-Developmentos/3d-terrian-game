@@ -20,13 +20,15 @@ public class ProgressBar : MonoBehaviour
     }
 
     // Returns the current health value.
-    public int GetCurrentHealth() {
+    public int GetCurrentHealth()
+    {
         return currentHealth;
     }
 
     // Decreases the current health by the specified damage amount.
-    public void DecreaseHealth() {
-        currentHealth-=damageTaken;
+    public void DecreaseHealth()
+    {
+        currentHealth -= damageTaken;
     }
 
     // Calculates and sets the fill amount of the progress bar based on the current health.

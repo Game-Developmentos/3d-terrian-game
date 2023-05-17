@@ -29,14 +29,12 @@ public class EnemySpawner : MonoBehaviour
         int numColliders = Physics.OverlapSphereNonAlloc(currPos, overlapRadius, hitColliders);
         return numColliders > 0;
     }
-
     // Schedules the next enemy spawn.
     private void ScheduleNextSpawn()
     {
         SpawnTime = Random.Range(minTimeToSpawn, maxTimeToSpawn);
         Invoke("SpawnEnemy", SpawnTime);
     }
-    
     // Spawns an enemy at a random position within the spawn radius.
     private void SpawnEnemy()
     {
