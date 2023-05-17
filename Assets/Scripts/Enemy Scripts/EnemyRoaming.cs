@@ -16,12 +16,13 @@ public class EnemyRoaming : MonoBehaviour
     private float changeDirectionDelay = 2f;
     private int interactLayer = 6;
     private float overlapRadius = 0.1f;
-
     private float SamplePositionMaxDist = 1f;
     private void Awake()
     {
         isWalkingHash = Animator.StringToHash("isWalking");
     }
+
+    // Initializes the necessary variables and positions for enemy roaming.
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -30,6 +31,8 @@ public class EnemyRoaming : MonoBehaviour
         roamPosition = GetRoamingPosition();
 
     }
+
+    // Returns a random direction for enemy movement.
     private Vector3 GetRandomDirection()
     {
         float randomDirectionX = Random.Range(-1f, 1f);
@@ -37,12 +40,14 @@ public class EnemyRoaming : MonoBehaviour
         return new Vector3(randomDirectionX, 0, randomDirectionZ).normalized;
     }
 
+    // Generates a new roaming position for the enemy.
     private Vector3 GetRoamingPosition()
     {
         float distance = Random.Range(5f, 10f);
         return startingPosition + GetRandomDirection() * distance;
     }
 
+    // Checks if the enemy is overlapping with another enemy.
     bool isOverLappingAnotherEnemy()
     {
         int interactLayerMask = 1 << interactLayer;
@@ -50,6 +55,7 @@ public class EnemyRoaming : MonoBehaviour
         return hitColliders.Length > 0;
     }
 
+    // Sets a new destination for enemy roaming.
     void SetNewDestination()
     {
         roamPosition = GetRoamingPosition();
@@ -59,6 +65,8 @@ public class EnemyRoaming : MonoBehaviour
             navMeshAgent.SetDestination(hit.position);
         }
     }
+
+    // Updates the enemy's movement and handles roaming behavior.
     void Update()
     {
         bool isReadyToRoam = waitTimeBeforePatrol < 0;

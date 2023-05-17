@@ -11,6 +11,7 @@ public class CollisionManager : MonoBehaviour
     private float hitDelayTime = 0.1f;
     private bool isTimerRunning = false;
 
+    // Called when a collision with an enemy is continuously detected.
     private void OnCollisionStay(Collision other)
     {
         if (gameObject && other.gameObject.CompareTag("Enemy"))
@@ -22,6 +23,7 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    // Invokes events after a delay using a coroutine.
     private IEnumerator InvokeEventsWithDelay()
     {
         isTimerRunning = true;
@@ -34,6 +36,7 @@ public class CollisionManager : MonoBehaviour
         isTimerRunning = false;
     }
 
+    // Called when a trigger collision occurs.
     private void OnTriggerEnter(Collider other)
     {
         if (gameObject != null)

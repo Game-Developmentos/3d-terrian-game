@@ -8,6 +8,8 @@ public class CursorHider : MonoBehaviour
     [SerializeField] InputAction toggleCursorAction;
     void OnEnable() { toggleCursorAction.Enable(); }
     void OnDisable() { toggleCursorAction.Disable(); }
+
+    // Validates and sets up the toggleCursorAction input action.
     void OnValidate()
     {
 
@@ -18,12 +20,14 @@ public class CursorHider : MonoBehaviour
     }
 
 
+    // Sets the initial cursor visibility and lock state when the component starts.
     void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    // Updates the cursor visibility and lock state based on the toggleCursorAction input.
     void Update()
     {
         if (toggleCursorAction.WasPerformedThisFrame())

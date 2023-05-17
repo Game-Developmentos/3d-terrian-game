@@ -16,6 +16,7 @@ public class EnemyChaser : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
+    // Updates the position of the player object and sets it as the destination for the navMeshAgent if active.
     private void Update()
     {
         playerPosition = player.transform.position;
@@ -26,7 +27,8 @@ public class EnemyChaser : MonoBehaviour
         }
 
     }
-    internal Vector3 GetTargetPosition()
+    // Retrieves the position of the player object.
+    public Vector3 GetTargetPosition()
     {
         return player.transform.position;
     }

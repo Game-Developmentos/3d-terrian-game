@@ -12,15 +12,16 @@ public class EnemySpawner : MonoBehaviour
     private float overlapRadius = 0.1f;
     private float SpawnTime;
     private float SamplePositionMaxDist = 10f;
-
     private float spawnRadius = 25f;
     [SerializeField] private int maxEnemiesPerLocation = 20;
+
     private void Start()
     {
         numOfEnemies = 0;
         ScheduleNextSpawn();
     }
 
+    // Checks if there is a collision at the given position.
     private bool HasCollision(Vector3 currPos)
     {
         int maxColliders = 5;
@@ -28,11 +29,15 @@ public class EnemySpawner : MonoBehaviour
         int numColliders = Physics.OverlapSphereNonAlloc(currPos, overlapRadius, hitColliders);
         return numColliders > 0;
     }
+
+    // Schedules the next enemy spawn.
     private void ScheduleNextSpawn()
     {
         SpawnTime = Random.Range(minTimeToSpawn, maxTimeToSpawn);
         Invoke("SpawnEnemy", SpawnTime);
     }
+    
+    // Spawns an enemy at a random position within the spawn radius.
     private void SpawnEnemy()
     {
         NavMeshHit hit;

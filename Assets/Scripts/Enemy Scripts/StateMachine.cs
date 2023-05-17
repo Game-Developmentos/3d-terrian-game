@@ -20,6 +20,7 @@ public class StateMachine : MonoBehaviour
 
     private State activeState = null;
 
+    // Transitions to the specified state.
     public void GoToState(State newActiveState) {
         if (activeState == newActiveState) return;
         if (activeState != null) activeState.enabled = false;
@@ -28,11 +29,13 @@ public class StateMachine : MonoBehaviour
         // Debug.Log("Going to state " + activeState);
     }
 
+    // Adds a new state to the state machine.
     public StateMachine AddState(State newState) {
         states.Add(newState);
         return this;
     }
-
+    
+    // Adds a transition from one state to another based on a condition.
     public StateMachine AddTransition(State fromState, Func<bool> condition, State toState) {
         transitions.Add(new Transition(fromState, condition, toState));
         return this;

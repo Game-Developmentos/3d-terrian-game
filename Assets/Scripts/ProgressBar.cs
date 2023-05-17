@@ -12,17 +12,24 @@ public class ProgressBar : MonoBehaviour
     public Image fill;
     private Color color;
     private int damageTaken = 5;
+
+    // Updates the progress bar fill based on the current health value.
     void Update()
     {
         GetCurrentFill();
     }
 
+    // Returns the current health value.
     public int GetCurrentHealth() {
         return currentHealth;
     }
+
+    // Decreases the current health by the specified damage amount.
     public void DecreaseHealth() {
         currentHealth-=damageTaken;
     }
+
+    // Calculates and sets the fill amount of the progress bar based on the current health.
     void GetCurrentFill()
     {
         float currentOffset = currentHealth - minimum;

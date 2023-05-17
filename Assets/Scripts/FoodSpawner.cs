@@ -15,18 +15,22 @@ public class FoodSpawner : MonoBehaviour
     private float overlapRadius = 0.1f;
     private float SamplePositionMaxDist = 10f;
 
+
+    // Starts the food spawning process when the component is enabled.
     private void Start()
     {
         numOfObjectsSpawned = 0;
         ScheduleNextSpawn();
     }
 
+    // Schedules the next food spawn based on the defined time range.
     private void ScheduleNextSpawn()
     {
         SpawnTime = Random.Range(minTimeToSpawn, maxTimeToSpawn);
         Invoke("SpawnFood", SpawnTime);
     }
 
+    // Checks if there is any collision at the specified position.
     private bool HasCollision(Vector3 currPos)
     {
         int maxColliders = 5;
@@ -34,6 +38,8 @@ public class FoodSpawner : MonoBehaviour
         int numColliders = Physics.OverlapSphereNonAlloc(currPos, overlapRadius, hitColliders);
         return numColliders > 0;
     }
+
+    // Spawns a food object at a random position within the spawn radius.
     void SpawnFood()
     {
         NavMeshHit hit;

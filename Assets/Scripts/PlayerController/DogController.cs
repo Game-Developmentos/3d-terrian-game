@@ -16,6 +16,7 @@ public class DogController : MonoBehaviour
     [Header("Keyboard Input")]
     private DogInputActions dogInputActions;
 
+    // Variables for movement input
     [SerializeField] Vector2 currentMovementInput;
     [SerializeField] Vector3 currentMovement;
     [SerializeField] private float moveSpeed = 5f;
@@ -28,6 +29,7 @@ public class DogController : MonoBehaviour
     private int directionHash;
     private int isInteractHash;
 
+    // Variables for movement state
     [SerializeField] private bool isMovementPressed;
     [SerializeField] private bool isWalking;
 
@@ -60,10 +62,12 @@ public class DogController : MonoBehaviour
         HandleAnimations();
         if (isMovementPressed)
         {
+            // Rotate the dog towards the movement direction
             float targetAngle = Mathf.Atan2(currentMovement.x, currentMovement.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f).normalized;
 
+            // Move the dog in the movement direction
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             transform.position += moveDir.normalized * moveSpeed * Time.deltaTime;
         }
@@ -71,6 +75,7 @@ public class DogController : MonoBehaviour
 
     private void OnMovementInput(InputAction.CallbackContext context)
     {
+        // Handle movement input
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = currentMovementInput.x;
         currentMovement.y = 0.0f;
@@ -81,13 +86,14 @@ public class DogController : MonoBehaviour
 
     private void OnInteractInput(InputAction.CallbackContext context)
     {
+        // Handle interact input
         Debug.Log("Interact!");
         animator.SetTrigger(isInteractHash);
     }
     private void HandleAnimations()
     {
         isWalking = animator.GetBool(isWalkingHash);
-        // Determine idle or walking state
+        // Determine idle or walking state based on movement input
         if (isMovementPressed && !isWalking)
         {
             animator.SetBool(isWalkingHash, true);
