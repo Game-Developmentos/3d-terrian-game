@@ -11,9 +11,7 @@ public class ProgressBar : MonoBehaviour
     public Image mask;
     public Image fill;
     private Color color;
-
-
-
+    private int damageTaken = 5;
     void Update()
     {
         GetCurrentFill();
@@ -23,7 +21,7 @@ public class ProgressBar : MonoBehaviour
         return currentHealth;
     }
     public void DecreaseHealth() {
-        currentHealth-=5;
+        currentHealth-=damageTaken;
     }
     void GetCurrentFill()
     {

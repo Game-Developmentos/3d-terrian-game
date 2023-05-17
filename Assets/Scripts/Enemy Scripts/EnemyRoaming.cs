@@ -12,11 +12,12 @@ public class EnemyRoaming : MonoBehaviour
     private Animator animator;
     private float waitTimeBeforePatrol = 2f;
     private int isWalkingHash;
-
     private float maxTimer = 2f;
-    private float currTimer = 2f;
-
+    private float changeDirectionDelay = 2f;
     private int interactLayer = 6;
+    private float overlapRadius = 0.1f;
+
+    private float SamplePositionMaxDist = 1f;
     private void Awake()
     {
         isWalkingHash = Animator.StringToHash("isWalking");
@@ -31,18 +32,21 @@ public class EnemyRoaming : MonoBehaviour
     }
     private Vector3 GetRandomDirection()
     {
-        return new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)).normalized;
+        float randomDirectionX = Random.Range(-1f, 1f);
+        float randomDirectionZ = Random.Range(-1f, 1f);
+        return new Vector3(randomDirectionX, 0, randomDirectionZ).normalized;
     }
 
     private Vector3 GetRoamingPosition()
     {
-        return startingPosition + GetRandomDirection() * Random.Range(5f, 10f);
+        float distance = Random.Range(5f, 10f);
+        return startingPosition + GetRandomDirection() * distance;
     }
 
     bool isOverLappingAnotherEnemy()
     {
         int interactLayerMask = 1 << interactLayer;
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 0.1f, interactLayerMask);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, overlapRadius, interactLayerMask);
         return hitColliders.Length > 0;
     }
 
@@ -50,37 +54,38 @@ public class EnemyRoaming : MonoBehaviour
     {
         roamPosition = GetRoamingPosition();
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(roamPosition, out hit, 1f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(roamPosition, out hit, SamplePositionMaxDist, NavMesh.AllAreas))
         {
             navMeshAgent.SetDestination(hit.position);
         }
     }
     void Update()
     {
-        if (waitTimeBeforePatrol >= 0)
+        bool isReadyToRoam = waitTimeBeforePatrol < 0;
+        if (!isReadyToRoam)
         {
             waitTimeBeforePatrol -= Time.deltaTime;
             return;
         }
+
         float enemySpeed = navMeshAgent.velocity.magnitude;
-        animator.SetFloat("Speed", enemySpeed * 4);
         animator.SetBool(isWalkingHash, true);
 
         if (isOverLappingAnotherEnemy())
         {
             roamPosition = GetRoamingPosition();
-            if (currTimer > 0)
+            bool isReadyForNewPosition = changeDirectionDelay < 0;
+            if (!isReadyForNewPosition)
             {
-                currTimer -= Time.deltaTime;
+                changeDirectionDelay -= Time.deltaTime;
             }
             else
             {
                 navMeshAgent.SetDestination(roamPosition);
-                currTimer = maxTimer;
+                changeDirectionDelay = maxTimer;
 
             }
         }
-
 
         if (!navMeshAgent.pathPending && !navMeshAgent.hasPath)
         {

@@ -9,12 +9,7 @@ public class ScoreManager : MonoBehaviour
 {
 
     public TMP_Text CurrentScore;
-    private int score;
-
-    private void Start()
-    {
-        score = 0;
-    }
+    private int score = 0;
 
     public void AddScore()
     {

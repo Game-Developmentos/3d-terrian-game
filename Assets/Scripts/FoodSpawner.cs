@@ -8,11 +8,12 @@ public class FoodSpawner : MonoBehaviour
     public GameObject[] FoodPrefabs;
     [SerializeField] private float minTimeToSpawn = 5f;
     [SerializeField] private float maxTimeToSpawn = 15f;
-
     private int numOfObjectsSpawned;
-
+    private int maxObjectsToSpawn = 20;
     private float SpawnTime;
-
+    private float spawnRadius = 25f;
+    private float overlapRadius = 0.1f;
+    private float SamplePositionMaxDist = 10f;
 
     private void Start()
     {
@@ -30,19 +31,19 @@ public class FoodSpawner : MonoBehaviour
     {
         int maxColliders = 5;
         Collider[] hitColliders = new Collider[maxColliders];
-        int numColliders = Physics.OverlapSphereNonAlloc(currPos, 0.1f, hitColliders);
+        int numColliders = Physics.OverlapSphereNonAlloc(currPos, overlapRadius, hitColliders);
         return numColliders > 0;
     }
     void SpawnFood()
     {
         NavMeshHit hit;
-        Vector3 randomPos = transform.position + Random.insideUnitSphere * 25f;
+        Vector3 randomPos = transform.position + Random.insideUnitSphere * spawnRadius;
         if (HasCollision(randomPos))
         {
             ScheduleNextSpawn();
             return;
         }
-        if (NavMesh.SamplePosition(randomPos, out hit, 10f, NavMesh.AllAreas) && numOfObjectsSpawned < 20)
+        if (NavMesh.SamplePosition(randomPos, out hit, SamplePositionMaxDist, NavMesh.AllAreas) && numOfObjectsSpawned < maxObjectsToSpawn)
         {
             int randomIndex = Random.Range(0, FoodPrefabs.Length);
             Instantiate(FoodPrefabs[randomIndex], hit.position, Quaternion.identity);

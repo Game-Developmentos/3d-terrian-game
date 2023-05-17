@@ -11,7 +11,6 @@ public class EnemyChaser : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     [SerializeField] private Vector3 playerPosition;
 
-
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -21,11 +20,9 @@ public class EnemyChaser : MonoBehaviour
     {
         playerPosition = player.transform.position;
         float distanceToPlayer = Vector3.Distance(playerPosition, transform.position);
-        // FacePlayer();
         if (navMeshAgent.isActiveAndEnabled)
         {
             navMeshAgent.SetDestination(playerPosition);
-
         }
 
     }
