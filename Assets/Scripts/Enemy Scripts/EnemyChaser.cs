@@ -20,7 +20,6 @@ public class EnemyChaser : MonoBehaviour
     private void Update()
     {
         playerPosition = player.transform.position;
-        float distanceToPlayer = Vector3.Distance(playerPosition, transform.position);
         if (navMeshAgent.isActiveAndEnabled)
         {
             navMeshAgent.SetDestination(playerPosition);

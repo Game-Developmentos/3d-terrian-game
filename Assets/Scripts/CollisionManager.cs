@@ -32,7 +32,6 @@ public class CollisionManager : MonoBehaviour
         // Invoke the events after the 2-second delay
         OnHit?.Invoke(this, EventArgs.Empty);
         OnGameOver?.Invoke(this, EventArgs.Empty);
-
         isTimerRunning = false;
     }
 

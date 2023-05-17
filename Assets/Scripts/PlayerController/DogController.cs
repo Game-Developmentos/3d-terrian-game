@@ -7,11 +7,7 @@ using System;
 [RequireComponent(typeof(Animator))]
 public class DogController : MonoBehaviour
 {
-    // public event EventHandler OnPointGained;
-    // public event EventHandler OnHit;
-    // public event EventHandler OnGameOver;
     [SerializeField] private Transform cam;
-
 
     [Header("Keyboard Input")]
     private DogInputActions dogInputActions;

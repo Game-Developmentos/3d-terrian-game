@@ -75,8 +75,6 @@ public class EnemyRoaming : MonoBehaviour
             waitTimeBeforePatrol -= Time.deltaTime;
             return;
         }
-
-        float enemySpeed = navMeshAgent.velocity.magnitude;
         animator.SetBool(isWalkingHash, true);
 
         if (isOverLappingAnotherEnemy())
